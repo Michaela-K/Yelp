@@ -6,5 +6,3 @@ CREATE TABLE restaurants(
 );
 
 Insert into restaurants (name, location, price_range) values ('Panera', 'Markham, Ontario', 4);
-
-this
