@@ -1,5 +1,6 @@
 //This file createa and initialises the app
-
+//import dtenv before anything else
+require("dotenv").config();
 //import express
 const express = require("express")
 
