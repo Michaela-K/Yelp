@@ -12,15 +12,19 @@ const app = express()
 //This needs to be first or it would never be used, it would hit the other routes and stop
 //put middleware below app(it does some work before sending to next step which is the route handler->(req, res))
 app.use((req, res, next) => {  //next allows the middleware to pass the request fown to the route handler -> req, res
-  console.log("the middleware")
+  console.log("the custom middleware")
   next();
 });
 
-//third party middleware already call next, so you dont have to actually call it in the function
+//THIRD PARTY MIDDLEWARE
+//3rd party already calls next, so you dont have to actually call it in the function
 app.use(morgan("dev"));
+//comes built in with express, when we send a request, it will take the info in the body of the request
+//and it will attach it to our request object, and attach it under the property called body
+app.use(express.json());  //this is how we can use "req.body"
 
 //to create a route we have to reference the app
-// re and res are referred to as route handlers
+//req and res are referred to as route handlers
 //the reponse will be stored in "res"
 
 //Get All Restaurants
@@ -48,7 +52,7 @@ app.get("/api/v1/restaurants/:id", (req, res) => {
 //Go to Postman -> Body -> raw -> set as JSON -> enter json
 //Create a Reastaurant
 app.post("/api/v1/restaurants/", (req, res) => {
-  console.log(req)
+  console.log(req.body)
 });
 
 //make the app listen on a specific port and then do actions after it starts up
