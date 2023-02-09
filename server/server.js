@@ -8,6 +8,11 @@ const morgan = require("morgan")
 const port = process.env.PORT || 3002;
 const app = express()
 
+//make the app listen on a specific port and then do actions after it starts up
+app.listen(port, () =>{
+  console.log(`server is up and listening on port ${port}`)
+}); 
+
 //MIDDLEWARE CUSTOM EXAMPLE
 //This needs to be first or it would never be used, it would hit the other routes and stop
 //put middleware below app(it does some work before sending to next step which is the route handler->(req, res))
@@ -33,7 +38,7 @@ app.get("/api/v1/restaurants", (req, res) => {
   res.status(200).json({
     status:"success",
     data: {
-      restaurant: ["Mc Donalds", "Wendy/'s"]
+      restaurant: "Mc Donalds"
     },
   })
 })  
@@ -41,21 +46,42 @@ app.get("/api/v1/restaurants", (req, res) => {
 //Get a Reastaurant
 app.get("/api/v1/restaurants/:id", (req, res) => {
   console.log(req.params)
-  // res.status(200).json({
-  //   status:"success",
-  //   data: {
-  //     restaurant: ["Mc Donalds", "Wendy/'s"]
-  //   },
-  // })
+  res.status(201).json({
+    status:"success",
+    data: {
+      restaurant: "Mc Donalds"
+    },
+  })
 })  
 
 //Go to Postman -> Body -> raw -> set as JSON -> enter json
 //Create a Reastaurant
-app.post("/api/v1/restaurants/", (req, res) => {
+app.post("/api/v1/restaurants", (req, res) => {
   console.log(req.body)
+  res.status(201).json({
+    status:"success",
+    data: {
+      restaurant: "Mc Donalds"
+    },
+  })
 });
 
-//make the app listen on a specific port and then do actions after it starts up
-app.listen(port, () =>{
-  console.log(`server is up and listening on port ${port}`)
-}); 
+//Update a Restaurant
+app.put("/api/v1/restaurants/:id", (req, res) => {
+  console.log(req.params.id);
+  console.log(req.body);
+  res.status(200).json({
+    status:"success",
+    data: {
+      restaurant: "Mc Donalds"
+    },
+  })
+});
+
+//Delete a Restaurant
+app.delete("/api/v1/restaurants/:id", (req, res) => {
+  res.status(204).json({
+    status:"success",
+  })
+});
+
