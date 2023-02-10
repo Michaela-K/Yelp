@@ -25,7 +25,7 @@ app.get("/api/v1/restaurants", (req, res) => {
 
 //Get a Reastaurant
 app.get("/api/v1/restaurants/:id", (req, res) => {
-  console.log(req)
+  console.log(req.params)
   // res.status(200).json({
   //   status:"success",
   //   data: {
