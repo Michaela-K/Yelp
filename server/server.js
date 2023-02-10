@@ -10,12 +10,19 @@ const app = express()
 
 //to create a route we have to reference the app
 //the reponse will be stored in "res"
-app.get("/restaurant", (req, res) => {
+
+//Get All Restaurants
+app.get("/api/v1/restaurants", (req, res) => {
   console.log("get all restaurants")
-  res.json({
-    restaurant: "Mc Donalds"
+  res.status(200).json({
+    status:"success",
+    data: {
+      restaurant: ["Mc Donalds", "Wendy/'s"]
+    },
   })
 })  
+
+//Get a Reastaurant
 
 //make the app listen on a specific port and then do actions after it starts up
 app.listen(port, () =>{
