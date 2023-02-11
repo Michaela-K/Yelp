@@ -9,4 +9,4 @@ const app = express()
 //make the app listen on a specific port and then do actions after it starts up
 app.listen(port, () =>{
   console.log(`server is up and listening on port ${port}`)
-}); 
+});
