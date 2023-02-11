@@ -6,7 +6,7 @@ const express = require("express")
 const db = require("./db")  //when you do /db, it automatically looks for index.js that why we dont specify here. This is how we get access to pool.query
 const morgan = require("morgan")
 //create an instance of express and stored it in a variable called app
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 3001;
 const app = express()
 
 //make the app listen on a specific port and then do actions after it starts up
