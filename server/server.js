@@ -42,7 +42,7 @@ app.get("/api/v1/restaurants", async (req, res) => {
   res.status(200).json({
     status:"success",
     data: {
-      restaurant: "Mc Donalds"
+      restaurant: results[rows] 
     },
   })
 })  
