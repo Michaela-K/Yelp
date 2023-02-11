@@ -9,6 +9,7 @@ const port = process.env.PORT || 3002;
 const app = express()
 
 //to create a route we have to reference the app
+// re and res are referred to as route handlers
 //the reponse will be stored in "res"
 
 //Get All Restaurants
@@ -23,6 +24,15 @@ app.get("/api/v1/restaurants", (req, res) => {
 })  
 
 //Get a Reastaurant
+app.get("/api/v1/restaurants/:id", (req, res) => {
+  console.log(req)
+  // res.status(200).json({
+  //   status:"success",
+  //   data: {
+  //     restaurant: ["Mc Donalds", "Wendy/'s"]
+  //   },
+  // })
+})  
 
 //make the app listen on a specific port and then do actions after it starts up
 app.listen(port, () =>{
