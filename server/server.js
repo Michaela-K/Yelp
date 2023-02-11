@@ -34,8 +34,11 @@ app.use(express.json());  //this is how we can use "req.body"
 //the reponse will be stored in "res"
 
 //Get All Restaurants
-app.get("/api/v1/restaurants", (req, res) => {
+app.get("/api/v1/restaurants", async (req, res) => {
+  //this db.query will returna promise because it takes some time
+  const results = await db.query("select * from restaurants") 
   console.log("get all restaurants")
+  console.log(results);
   res.status(200).json({
     status:"success",
     data: {
