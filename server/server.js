@@ -70,14 +70,20 @@ app.get("/api/v1/restaurants/:id", async (req, res) => {
 
 //Go to Postman -> Body -> raw -> set as JSON -> enter json
 //Create a Reastaurant
-app.post("/api/v1/restaurants", (req, res) => {
+app.post("/api/v1/restaurants", async (req, res) => {
   console.log(req.body)
-  res.status(201).json({
-    status:"success",
-    data: {
-      restaurant: "Mc Donalds"
-    },
-  })
+  try{
+    const results = await db.query(`INSERT INTO restaurants (name, location, price_range) values ($1,$2, $3) returning *`,   //After Inserting SQL doesnt show the inserted items, In order to see what you just enetered, you need "Returning *"
+    [req.body.name, req.body.location, req.body.price_range]); //To prevent SQL injection attacks
+    res.status(201).json({
+      status:"success",
+      data: {
+        restaurant: results.rows[0],
+      },
+    });
+  }catch(err){
+    console.log(err)
+  }
 });
 
 //Update a Restaurant
