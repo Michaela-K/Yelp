@@ -35,16 +35,21 @@ app.use(express.json());  //this is how we can use "req.body"
 
 //Get All Restaurants
 app.get("/api/v1/restaurants", async (req, res) => {
-  //this db.query will returna promise because it takes some time
-  const results = await db.query("select * from restaurants") 
-  console.log("get all restaurants")
-  console.log(results);
-  res.status(200).json({
-    status:"success",
-    data: {
-      restaurant: results[rows] 
-    },
-  })
+  try{  //once you use async await you need try catch to get error messages?
+    //this db.query will returna promise because it takes some time
+    const results = await db.query("select * from restaurants"); 
+    console.log("get all restaurants");
+    console.log(results);
+    res.status(200).json({
+      status:"success",
+      results: results.rows.length,
+      data: {
+        restaurants: results.rows,
+      },
+    });
+  }catch(err){
+    console.log(err)
+  }
 })  
 
 //Get a Reastaurant
