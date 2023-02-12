@@ -36,7 +36,7 @@ app.use(express.json());  //this is how we can use "req.body"
 //Get All Restaurants
 app.get("/api/v1/restaurants", async (req, res) => {
   try{  //once you use async await you need try catch to get error messages?
-    //this db.query will returna promise because it takes some time
+    //this db.query will return a promise because it takes some time
     const results = await db.query("select * from restaurants"); 
     console.log("get all restaurants");
     console.log(results);
@@ -53,14 +53,19 @@ app.get("/api/v1/restaurants", async (req, res) => {
 })  
 
 //Get a Reastaurant
-app.get("/api/v1/restaurants/:id", (req, res) => {
-  console.log(req.params)
-  res.status(201).json({
+app.get("/api/v1/restaurants/:id", async (req, res) => {
+  console.log(req.params.id)
+  try{
+  const results = await db.query(`select * from restaurants where id = $1`, [req.params.id]); //To prevent SQL injection attacks
+  res.status(200).json({
     status:"success",
     data: {
-      restaurant: "Mc Donalds"
+      restaurants: results.rows[0],
     },
-  })
+  });
+}catch(err){
+  console.log(err)
+}
 })  
 
 //Go to Postman -> Body -> raw -> set as JSON -> enter json
