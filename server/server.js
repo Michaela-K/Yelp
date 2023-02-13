@@ -3,6 +3,7 @@
 require("dotenv").config();
 //import express & morgan
 const express = require("express")
+const cors = require("cors")
 const db = require("./db")  //when you do /db, it automatically looks for index.js that why we dont specify here. This is how we get access to pool.query
 const morgan = require("morgan")
 //create an instance of express and stored it in a variable called app
@@ -18,7 +19,7 @@ app.listen(port, () =>{
 //This needs to be first or it would never be used, it would hit the other routes and stop
 //put middleware below app(it does some work before sending to next step which is the route handler->(req, res))
 app.use((req, res, next) => {  //next allows the middleware to pass the request fown to the route handler -> req, res
-  console.log("the custom middleware")
+  // console.log("the custom middleware")
   next();
 });
 
@@ -28,6 +29,7 @@ app.use(morgan("dev"));
 //comes built in with express, when we send a request, it will take the info in the body of the request
 //and it will attach it to our request object, and attach it under the property called body
 app.use(express.json());  //this is how we can use "req.body"
+app.use(cors());
 
 //to create a route we have to reference the app
 //req and res are referred to as route handlers
@@ -38,8 +40,8 @@ app.get("/api/v1/restaurants", async (req, res) => {
   try{  //once you use async await you need try catch to get error messages?
     //this db.query will return a promise because it takes some time
     const results = await db.query("select * from restaurants"); 
-    console.log("get all restaurants");
-    console.log(results);
+    // console.log("get all restaurants");
+    // console.log(results);
     res.status(200).json({
       status:"success",
       results: results.rows.length,
@@ -54,7 +56,7 @@ app.get("/api/v1/restaurants", async (req, res) => {
 
 //Get a Reastaurant
 app.get("/api/v1/restaurants/:id", async (req, res) => {
-  console.log(req.params.id)
+  // console.log(req.params.id)
   try{
   const results = await db.query(`select * from restaurants where id = $1`, [req.params.id]); //To prevent SQL injection attacks
   res.status(200).json({
@@ -71,7 +73,7 @@ app.get("/api/v1/restaurants/:id", async (req, res) => {
 //Go to Postman -> Body -> raw -> set as JSON -> enter json
 //Create a Reastaurant
 app.post("/api/v1/restaurants", async (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   try{
     const results = await db.query(`INSERT INTO restaurants (name, location, price_range) values ($1,$2, $3) returning *`,   //After Inserting SQL doesnt show the inserted items, In order to see what you just enetered, you need "Returning *"
     [req.body.name, req.body.location, req.body.price_range]); //To prevent SQL injection attacks
@@ -88,8 +90,8 @@ app.post("/api/v1/restaurants", async (req, res) => {
 
 //Update a Restaurant
 app.put("/api/v1/restaurants/:id", async (req, res) => {
-  console.log(req.params.id);
-  console.log(req.body);
+  // console.log(req.params.id);
+  // console.log(req.body);
   try{
     const results = await db.query(`UPDATE restaurants SET name = $1, location = $2, price_range=$3 where id = $4 returning *`,
     [req.body.name, req.body.location, req.body.price_range, req.params.id]); //To prevent SQL injection attacks
