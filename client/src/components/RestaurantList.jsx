@@ -3,7 +3,7 @@ import React from 'react'
 const RestaurantList = () => {
   return (
     <div>
-      <table class="table table-dark">
+      <table className="table table-dark">
   <thead>
     <tr>
       <th scope="col">Restaurant</th>
