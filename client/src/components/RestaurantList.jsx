@@ -10,13 +10,13 @@ const RestaurantList = (props) => {  //everything has access to context api beac
     //this use effect hook DOES NOT LIKE IT when we return anything, thats why we need to put it in this fetchData function and call it. This function returns, no the useEffect
     const fetchData = async () => {
     try{
-      const response =  await RestaurantFinder.get("/"); // here its just a slash because it goes to the baseURL in the api file
+      const response =  await RestaurantFinder.get("/"); // here its just a slash because it goes to the baseURL in the RestaurantFinder lapi file
     console.log(response);  //this use effect hook does not like it when we return anything
     setRestaurants(response.data.data.restaurants)
     }catch (err){};
   };
     fetchData();
-  }, [])
+  }, [])  //empty array is put here so it will only run when it mounts and never again
 
   return (
     <div>
