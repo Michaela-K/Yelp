@@ -15,7 +15,7 @@ const RestaurantList = (props) => {  //everything has access to context api beac
     setRestaurants(response.data.data.restaurants)
     }catch (err){};
   };
-    fetchData();
+    fetchData(); 
   }, [])  //empty array is put here so it will only run when it mounts and never again
 
   return (
@@ -23,7 +23,7 @@ const RestaurantList = (props) => {  //everything has access to context api beac
       <table className="table table-dark">
   <thead>
     <tr>
-      <th scope="col">Restaurant</th>
+      <th scope="col">Restaurantt</th>
       <th scope="col">Location</th>
       <th scope="col">Price Range</th>
       <th scope="col">Ratings</th>
