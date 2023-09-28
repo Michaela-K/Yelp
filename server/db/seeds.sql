@@ -1,0 +1,1 @@
+INSERT INTO restaurants(name, location, price_range) values ('McDonalds', 'Toronto', 1);
