@@ -1,13 +1,13 @@
-//This file createa and initialises the app
-//import dotenv before anything else
+//This file creates and initialises the app
+//import dotenv before anything else, it will execute config and add any env variables before doing anything else in the code
 require("dotenv").config();
 //import express & morgan
 const express = require("express")
 const cors = require("cors")
-const db = require("./db")  //when you do /db, it automatically looks for index.js that why we dont specify here. This is how we get access to pool.query
+const db = require("./db")  //when you do /db, it automatically looks for index.js that why we dont specify here.This is how we get access to pool.query
 const morgan = require("morgan")
-//create an instance of express and stored it in a variable called app
 const port = process.env.PORT || 3001;
+//create an instance of express and stored it in a variable called app
 const app = express()
 
 //make the app listen on a specific port and then do actions after it starts up
@@ -28,7 +28,7 @@ app.use((req, res, next) => {  //next allows the middleware to pass the request 
 app.use(morgan("dev"));
 //comes built in with express, when we send a request, it will take the info in the body of the request
 //and it will attach it to our request object, and attach it under the property called body
-app.use(express.json());  //this is how we can use "req.body"
+app.use(express.json());  //this is how we can use "req.body", if we comment this req.body will be undefined
 app.use(cors());
 
 //to create a route we have to reference the app
@@ -36,23 +36,24 @@ app.use(cors());
 //the reponse will be stored in "res"
 
 //Get All Restaurants
-app.get("/api/v1/restaurants", async (req, res) => {
-  try{  //once you use async await you need try catch to get error messages?
-    //this db.query will return a promise because it takes some time
-    const results = await db.query("select * from restaurants"); 
-    // console.log("get all restaurants");
-    // console.log(results);
-    res.status(200).json({
-      status:"success",
-      results: results.rows.length,
-      data: {
-        restaurants: results.rows,
-      },
-    });
-  }catch(err){
-    console.log(err)
-  }
-})  
+app.get("/api/v1/restaurants", (req, res) => {
+    const results = db.query("select * from restaurants"); 
+    console.log("get all restaurants");
+    console.log(results);
+    results
+    .then(function(data) {
+      return res.status(200).json({
+        status:"success",
+        results: data.rows.length,
+        data: {
+          restaurants: data.rows,
+        },
+      });
+    }).catch(err => {
+      console.log('Error: ', err.message);
+    })
+ 
+}) 
 
 //Get a Reastaurant
 app.get("/api/v1/restaurants/:id", async (req, res) => {
