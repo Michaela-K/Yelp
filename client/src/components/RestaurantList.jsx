@@ -23,7 +23,7 @@ const RestaurantList = (props) => {  //everything has access to context api beac
       <table className="table table-dark">
   <thead>
     <tr>
-      <th scope="col">Restaurantt</th>
+      <th scope="col">Restaurant</th>
       <th scope="col">Location</th>
       <th scope="col">Price Range</th>
       <th scope="col">Ratings</th>
@@ -34,14 +34,14 @@ const RestaurantList = (props) => {  //everything has access to context api beac
   <tbody>
     <tr>
       <th scope="row">Fish and Chips</th>
-      <td>New Yoek</td>
+      <td>New York</td>
       <td>$</td>
       <td>***</td>
       <td><button className='btn btn-warning'>Update</button></td>
       <td><button className='btn btn-danger'>Delete</button></td>
     </tr>
     <tr>
-      <th scope="row">Burger Kring</th>
+      <th scope="row">Burger King</th>
       <td>Ohio</td>
       <td>$$</td>
       <td>**</td>
@@ -49,7 +49,7 @@ const RestaurantList = (props) => {  //everything has access to context api beac
       <td><button className='btn btn-danger'>Delete</button></td>
     </tr>
     <tr>
-      <th scope="row">Kull's Burgers</th>
+      <th scope="row">Krull's Burgers</th>
       <td>Cape Town</td>
       <td>$$$</td>
       <td>***</td>
