@@ -51,30 +51,23 @@ const RestaurantList = (props) => {  //everything has access to context api beac
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">Fish and Chips</th>
-      <td>New York</td>
-      <td>$</td>
-      <td>***</td>
-      <td><button className='btn btn-warning'>Update</button></td>
-      <td><button className='btn btn-danger'>Delete</button></td>
-    </tr>
-    <tr>
-      <th scope="row">Burger King</th>
-      <td>Ohio</td>
-      <td>$$</td>
-      <td>**</td>
-      <td><button className='btn btn-warning'>Update</button></td>
-      <td><button className='btn btn-danger'>Delete</button></td>
-    </tr>
-    <tr>
-      <th scope="row">Krull's Burgers</th>
-      <td>Cape Town</td>
-      <td>$$$</td>
-      <td>***</td>
-      <td><button className='btn btn-warning'>Update</button></td>
-      <td><button className='btn btn-danger'>Delete</button></td>
-    </tr>
+  { restaurants && // this line is in case the data doesnt load. It is asking if restaurants exist
+    restaurants.map((restaurant) => {
+      return (
+        <tr key={restaurant.id} >{/* wrap the key around everything to get rid of the "key" error */}
+        <td>{restaurant.name}</td>
+        <td>{restaurant.location}</td>
+        <td>{"$".repeat(restaurant.price_range)}</td>
+        {/* <td>{renderRating(restaurant)}</td> */}
+        <td>
+          {/* <button onClick={(e) => handleUpdate(e, restaurant.id)} className="btn btn-warning" > Update </button> */}
+        </td>
+        <td>
+          {/* <button onClick={(e) => handleDelete(e, restaurant.id)} className="btn btn-danger" > Delete </button> */}
+        </td>
+       </tr>
+      );
+    })}
   </tbody>
 </table>
     </div>
