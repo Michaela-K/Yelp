@@ -1,12 +1,16 @@
 import React, { useContext, useEffect } from 'react'
 import RestaurantFinder from '../apis/RestaurantFinder'
 import { RestaurantsContext } from '../context/RestaurantsContext'
+import { useNavigate } from 'react-router-dom'
 
 const RestaurantList = (props) => {  //everything has access to context api beacuse it wraps it in App.js
   //import use context and the context to store the data retrieved
   const {restaurants, setRestaurants} = useContext(RestaurantsContext)  //restaurants and setRestaurants comes from the RestaurantContext.js
-  //to get/fetch the data to mount as soon as you open is by using useEffect, This runs when the component 1) mounts and when it 2)re renders, unless you put empty []
 
+  let history = useNavigate(); //this history Obj represents the history of our browser
+  // console.log(history)
+
+  //to get/fetch the data to mount as soon as you open is by using useEffect, This runs when the component 1) mounts and when it 2)re renders, unless you put empty []
   useEffect(() => {
     //USING TRY CATCH 
 
@@ -37,6 +41,28 @@ const RestaurantList = (props) => {  //everything has access to context api beac
 
   }, [])  //empty array is put here so it will only run when it mounts and never again
 
+  const handleDelete = async (e, id) => {
+    // e.stopPropagation();
+    try {
+      const response = await RestaurantFinder.delete(`/${id}`);
+      setRestaurants(
+        restaurants.filter((restaurant) => {
+          return restaurant.id !== id;
+        })
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+  const handleUpdate = (id) => {
+    // e.stopPropagation();
+    //Here we are adding this URL into the history stack
+    //With useNavigate(), we do not need .push   It will automatically push the user to whatever route is specified
+    history(`/restaurants/${id}/update`);
+  };
+
   return (
     <div>
       <table className="table table-dark">
@@ -60,10 +86,11 @@ const RestaurantList = (props) => {  //everything has access to context api beac
         <td>{"$".repeat(restaurant.price_range)}</td>
         {/* <td>{renderRating(restaurant)}</td> */}
         <td>
-          {/* <button onClick={(e) => handleUpdate(e, restaurant.id)} className="btn btn-warning" > Update </button> */}
+          {/* if you are going to pass an arguement into this function handle... you need to add ()=> infront, because we dont want to run it right away, we only want to run it when it is clicked */}
+          <button onClick={() => handleUpdate(restaurant.id)} className="btn btn-warning" > Update </button>
         </td>
         <td>
-          {/* <button onClick={(e) => handleDelete(e, restaurant.id)} className="btn btn-danger" > Delete </button> */}
+          <button onClick={(e) => handleDelete(e, restaurant.id)} className="btn btn-danger" > Delete </button>
         </td>
        </tr>
       );

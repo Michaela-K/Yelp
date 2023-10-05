@@ -6,10 +6,15 @@ export const RestaurantsContext = createContext();
 
 //create the context provider component
 export const RestaurantsContextProvider = props => {
-  //use the useSatte to store the list of restaurants
+  //use the useState to store the list of restaurants
   const [restaurants, setRestaurants] = useState([])
+
+  const addRestaurants = (restaurant) => {
+    setRestaurants([...restaurants, restaurant]);
+  };
+
   return(
-    <RestaurantsContext.Provider value={{restaurants, setRestaurants}}>
+    <RestaurantsContext.Provider value={{restaurants, setRestaurants, addRestaurants}}>
       {props.children}
     </RestaurantsContext.Provider>
   )
