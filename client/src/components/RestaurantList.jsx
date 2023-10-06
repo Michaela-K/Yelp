@@ -18,7 +18,7 @@ const RestaurantList = (props) => {  //everything has access to context api beac
   //   //This function returns, no the useEffect
   //   const fetchData = async () => {
   //   try{
-  //     const response =  await RestaurantFinder.get("/"); // here its just a slash because it goes to the baseURL in the RestaurantFinder api file and adds a slah to the emd of that baseURL
+  //     const response =  await RestaurantFinder.get("/"); // here its just a slash because it goes to the baseURL in the RestaurantFinder api file and adds a slash to the end of that baseURL
   //     console.log(response);  //this use effect hook does not like it when we return anything
   //     //When we use async await, we implicitly return a Promise which useEffect does not like, so we created this fetchData fn to deal with it so the useEffect isnt returning anything, the fn is.
   //     setRestaurants(response.data.data.restaurants)
@@ -59,8 +59,8 @@ const RestaurantList = (props) => {  //everything has access to context api beac
   const handleUpdate = (id) => {
     // e.stopPropagation();
     //Here we are adding this URL into the history stack
-    //With useNavigate(), we do not need .push   It will automatically push the user to whatever route is specified
-    history(`/restaurants/${id}/update`);
+    //With useNavigate(), we do not need to .push   It will automatically push the user to whatever route is specified
+    history(`/restaurant/${id}/update`);
   };
 
   return (
