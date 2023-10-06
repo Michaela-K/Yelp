@@ -84,7 +84,7 @@ const RestaurantList = (props) => {  //everything has access to context api beac
         <td>{restaurant.name}</td>
         <td>{restaurant.location}</td>
         <td>{"$".repeat(restaurant.price_range)}</td>
-        {/* <td>{renderRating(restaurant)}</td> */}
+        <td>{restaurant.ratings}</td>
         <td>
           {/* if you are going to pass an arguement into this function handle... you need to add ()=> infront, because we dont want to run it right away, we only want to run it when it is clicked */}
           <button onClick={() => handleUpdate(restaurant.id)} className="btn btn-warning" > Update </button>

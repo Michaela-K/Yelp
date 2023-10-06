@@ -11,10 +11,11 @@ const App = () => {
       <div className="container">
           <BrowserRouter>
             <Routes> {/* this tells React to stop looking if it finds a matching route */}
-              <Route path="/" element={<Home/>}/>
               {/* If you are using React Router V6, else use component={Home}*/}
-              <Route path="/restaurant/:id" element={<RestaurantDetailPage/>}/>
               <Route path="/restaurant/:id/update" element={<UpdatePage/>}/>
+              <Route path="/restaurant/:id" element={<RestaurantDetailPage/>}/>
+              <Route path="/" element={<Home/>}/>
+              <Route path="*" element={<p>Not Found or you do not have permission</p>} />
             </Routes>
           </BrowserRouter>
         </div>
