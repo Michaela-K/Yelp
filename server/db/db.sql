@@ -1,5 +1,5 @@
-DROP TABLE restaurants;
-DROP TABLE reviews;
+DROP TABLE restaurants CASCADE;
+DROP TABLE reviews CASCADE;
 
 CREATE TABLE restaurants(
   id BIGSERIAL NOT NULL PRIMARY KEY, 
@@ -23,3 +23,4 @@ CREATE TABLE reviews (
 );
 
 -- \i server/db/db.sql
+-- \i C:/Users/Michaela/Documents/Projects/Yelp/server/db/db.sql

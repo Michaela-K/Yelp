@@ -39,7 +39,6 @@ app.use(cors());
 app.get("/api/v1/restaurants", (req, res) => {
     const results = db.query("select * from restaurants"); 
     console.log("get all restaurants");
-    console.log(results);
     results
     .then(function(data) {
       return res.status(200).json({
@@ -118,4 +117,6 @@ app.delete("/api/v1/restaurants/:id", async (req, res) => {
     console.log(err);
   }
 });
+
+
 
