@@ -62,11 +62,11 @@ const RestaurantList = (props) => {  //everything has access to context api beac
     e.stopPropagation();
     //Here we are adding this URL into the history stack
     //With useNavigate(), we do not need to .push   It will automatically push the user to whatever route is specified
-    history(`/restaurant/${id}/update`);
+    history(`/restaurants/${id}/update`);
   };
 
   const handleRestaurantSelect = (id) => {
-    history(`/restaurant/${id}`);
+    history(`/restaurants/${id}`);
   };
 
   return (

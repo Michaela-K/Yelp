@@ -11,7 +11,8 @@ const RestaurantDetailPage = () => {
     const response = RestaurantFinder.get(`/${id}`); //import the api
     response
       .then((response) => {
-        setSelectedRestaurant(response.data.data.restaurant)  //update our global state so we can tell the rest of our application what the selected rest. is
+        setSelectedRestaurant(response.data.data.restaurants)  //update our global state so we can tell the rest of our application what the selected rest. is
+      // console.log(response)
       })
       .catch((err) => {
         console.log(err.message);
