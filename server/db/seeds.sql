@@ -13,4 +13,4 @@ INSERT INTO reviews(restaurant_id, name, review, rating) values (3, 'Tami', 'The
 INSERT INTO reviews(restaurant_id, name, review, rating) values (4, 'Tami', 'A starbucks coffee is an absolute must', 5);
 
 
--- \i C:/Users/Michaela/Documents/Projects/Yelp/server/db/seeds.sql
+

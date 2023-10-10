@@ -23,4 +23,3 @@ CREATE TABLE reviews (
 );
 
 -- \i server/db/db.sql
--- \i C:/Users/Michaela/Documents/Projects/Yelp/server/db/db.sql
