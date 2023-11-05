@@ -40,7 +40,7 @@ app.get("/api/v1/restaurants", (req, res) => {
     const results = db.query("select * from restaurants"); 
     results
     .then(function(data) {
-      console.log("get all restaurants", data.rows);
+      // console.log("get all restaurants", data.rows);
       return res.status(200).json({
         status:"success",
         results: data.rows.length,
@@ -56,19 +56,32 @@ app.get("/api/v1/restaurants", (req, res) => {
 
 //Get a Reastaurant
 app.get("/api/v1/restaurants/:id", async (req, res) => {
-  // console.log(req.params.id)
-  try{
-  const results = await db.query(`select * from restaurants where id = $1`, [req.params.id]); //To prevent SQL injection attacks
-  res.status(200).json({
-    status:"success",
-    data: {
-      restaurants: results.rows[0],
-    },
-  });
-}catch(err){
-  console.log(err)
-}
-})  
+  // console.log(req.params.id);
+
+  try {
+    const restaurant = await db.query(
+      "select * from restaurants left join (select restaurant_id, COUNT(*), TRUNC(AVG(rating),1) as average_rating from reviews group by restaurant_id) reviews on restaurants.id = reviews.restaurant_id where id = $1",
+      [req.params.id]
+    );
+    // select * from restaurants wehre id = req.params.id
+
+    const reviews = await db.query(
+      "select * from reviews where restaurant_id = $1",
+      [req.params.id]
+    );
+    // console.log(reviews);
+
+    res.status(200).json({
+      status: "succes",
+      data: {
+        restaurant: restaurant.rows[0],
+        reviews: reviews.rows,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 //Go to Postman -> Body -> raw -> set as JSON -> enter json
 //Create a Reastaurant
