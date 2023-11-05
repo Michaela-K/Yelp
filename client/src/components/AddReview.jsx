@@ -22,8 +22,9 @@ const AddReview = () => {
         rating,
       });
       // trigger a refresh by routing to home page and then routing back to the current page
-      history.push("/");
-      history.push(location.pathname);
+      // history.push("/");
+      // history.push(location.pathname);
+      window.location.reload();
     } catch (err) {}
   };
 

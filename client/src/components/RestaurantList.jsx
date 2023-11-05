@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import RestaurantFinder from '../apis/RestaurantFinder'
 import { RestaurantsContext } from '../context/RestaurantsContext'
 import { useNavigate } from 'react-router-dom'
+import StarRating from './StarRating'
 
 const RestaurantList = (props) => {  //everything has access to context api beacuse it wraps it in App.js
   //import use context and the context to store the data retrieved
@@ -68,6 +69,18 @@ const RestaurantList = (props) => {  //everything has access to context api beac
     history(`/restaurants/${id}`);
   };
 
+  const renderRating = (restaurant) => {
+    if (!restaurant.count) {
+      return <span className="text-warning">0 reviews</span>;
+    }
+    return (
+      <>
+        <StarRating rating={restaurant.id} />
+        <span className="text-warning ml-1">({restaurant.count})</span>
+      </>
+    );
+  };
+
   return (
     <div>
       <table className="table table-dark">
@@ -90,7 +103,7 @@ const RestaurantList = (props) => {  //everything has access to context api beac
           <td>{restaurant.name}</td>
           <td>{restaurant.location}</td>
           <td>{"$".repeat(restaurant.price_range)}</td>
-          <td>{restaurant.ratings}</td>
+          <td>{renderRating(restaurant)}</td>
           <td>
             {/* if you are going to pass an arguement into this function handle... you need to add ()=> infront, because we dont want to run it right away, we only want to run it when it is clicked */}
             <button onClick={(e) => handleUpdate(e, restaurant.id)} className="btn btn-warning" > Update </button>
