@@ -55,7 +55,6 @@ const RestaurantList = (props) => {  //everything has access to context api beac
     }
   };
 
-
   const handleUpdate = (e, id) => {
     //When you click Update, the event will get propogated up from the button to the table row
     //with stopPropagation we won't send the event up to the table row, so it wont ever hit the history.push function

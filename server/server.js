@@ -38,9 +38,9 @@ app.use(cors());
 //Get All Restaurants
 app.get("/api/v1/restaurants", (req, res) => {
     const results = db.query("select * from restaurants"); 
-    console.log("get all restaurants");
     results
     .then(function(data) {
+      console.log("get all restaurants", data.rows);
       return res.status(200).json({
         status:"success",
         results: data.rows.length,
